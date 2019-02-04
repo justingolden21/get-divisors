@@ -1,14 +1,20 @@
 $(function() {
+	let url = new URL(window.location.href);
+	let q = url.searchParams.get('q');
+	$('#input').val(q || '1');
+
 	$('#input').select();
 	$('#input').change(displayDivisors);
 	displayDivisors();
 });
 
 function displayDivisors() {
-	let divisors = getDivisors(parseInt($('#input').val() ) );
+	let num = parseInt($('#input').val() );
+	let divisors = getDivisors(num);
 	$('#output').html(divisors.join(', ') );
-	$('#preview').html(parseInt($('#input').val() ) );
+	$('#preview').html(num);
 	$('#length').html(divisors.length + ' divisor' + (divisors.length==1 ? '' : 's') );
+	history.replaceState({}, '', '?q=' + num);
 }
 
 function getDivisors(num) {
