@@ -18,7 +18,11 @@ function displayDivisors() {
 }
 
 function getDivisors(num) {
-	if(num>9999999) return [];
+	if(num>99999999) {
+		$('#error').html('Error: Input larger than 99999999');
+		return [];
+	}
+	$('#error').html('');
 
 	let divisors = [];
 
